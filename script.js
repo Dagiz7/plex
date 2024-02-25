@@ -15,12 +15,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 card.innerHTML = `
                 <img class="card-img" src="${show.image.medium}" alt="${show.name}" />
                 <h3 class="card-title">${show.name}</h3>
-                    <p class="card-info">${show.rating.average}</p>
-                <p class="card-info">${show.language}</p>
-            
+                  <div class="rows-container">  
+          
+                   <p class="card-info">${show.language}</p>
+                         <p class="card-info">${show.rating.average}</p>
+                   </div>
                 <p class="card-info">${show.genres.join(', ')}</p>
-                <button class="comment-btn">Add Comment</button>
-                <button class="stream-btn">Stream</button>
+                   <div class="rows-container">
+                     <button class="comment-btn">Add Comment</button>
+                      <button class="stream-btn">Stream</button>
+                    </div>
                 `;
                 cardContainer.appendChild(card);
                 const commentBtn = card.querySelector('.comment-btn');
