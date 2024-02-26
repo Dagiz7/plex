@@ -13,24 +13,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                <img class="card-img" src="${show.image.medium}" alt="${show.name}" />
-                <h3 class="card-title">${show.name}</h3>
-                  <div class="rows-container">  
-          
-                   <p class="card-info">${show.language}</p>
-                         <p class="card-info">${show.rating.average}</p>
-                   </div>
-                <p class="card-info">${show.genres.join(', ')}</p>
-                   <div class="rows-container">
-                     <button class="comment-btn">Add Comment</button>
-                      <button class="stream-btn">Stream</button>
+                    <img class="card-img" src="${show.image.medium}" alt="${show.name}" />
+                    <h3 class="card-title">${show.name}</h3>
+                    <div class="rows-container">  
+                        <p class="card-info">${show.language}</p>
+                        <p class="card-info">${show.rating.average}</p>
+                    </div>
+                    <p class="card-info">${show.genres.join(', ')}</p>
+                    <div class="rows-container">
+                        <button class="comment-btn">Add Comment</button>
+                        <button class="stream-btn">Stream</button>
                     </div>
                 `;
                 cardContainer.appendChild(card);
+
+                // Add event listener for comment button
                 const commentBtn = card.querySelector('.comment-btn');
                 commentBtn.addEventListener('click', () => {
-                    // Redirect to a new page for comments
-                    window.location.href = 'comment-page.html'; // Replace with your comment page URL
+                    // Display the pop-up modal
+                    const popupContainer = document.getElementById('popup-container');
+                    const popupImg = document.getElementById('popup-img');
+                    const popupName = document.getElementById('popup-name');
+                    const popupGenre = document.getElementById('popup-genre');
+                    const popupLanguage = document.getElementById('popup-language');
+                    const popupSummary = document.getElementById('popup-summary');
+
+                    popupImg.src = show.image.medium; // Set the source of the pop-up image
+                    popupName.textContent = show.name; // Set the name
+                    popupGenre.textContent = "Genre: " + show.genres.join(', '); // Set the genres
+                    popupSummary.textContent = show.summary; // Set the summary
+                    popupLanguage.textContent = "Language: " + show.language; // Set the language
+
+                    popupContainer.style.display = 'block';
                 });
 
                 // Add event listener for streaming button
@@ -40,13 +54,46 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = 'stream-page.html'; // Replace with your streaming page URL
                 });
             });
+
+            // Close pop-up modal when close button is clicked
+            document.getElementById('close-popup').addEventListener('click', () => {
+                document.getElementById('popup-container').style.display = 'none';
+            });
+
+            // Submit comment when submit button is clicked
+            document.getElementById('submit-comment').addEventListener('click', () => {
+                const emailInput = document.getElementById('email-input').value;
+                const commentText = document.getElementById('comment-text').value;
+                // Add your logic here to handle the comment submission
+                console.log('Submitted email:', emailInput);
+                console.log('Submitted comment:', commentText);
+                // Close the pop-up modal after submitting comment
+                document.getElementById('popup-container').style.display = 'none';
+            });
         })
         .catch(error => {
-            console.error(error);
+            console.error('Error fetching data:', error);
         });
-
-    window.addEventListener('scroll', function () {
-        var header = document.querySelector('header');
-        header.style.top = (window.scrollY === 0) ? '0' : '-80px';
-    });
 });
+
+
+document.getElementById('submit-comment').addEventListener('click', () => {
+    const emailInput = document.getElementById('email-input').value;
+    const commentText = document.getElementById('comment-text').value;
+    // Check if email is valid
+    if (!validateEmail(emailInput)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    // Add your logic here to handle the comment submission
+    console.log('Submitted email:', emailInput);
+    console.log('Submitted comment:', commentText);
+    // Close the pop-up modal after submitting comment
+    document.getElementById('popup-container').style.display = 'none';
+});
+
+// Function to validate email address
+function validateEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+};
