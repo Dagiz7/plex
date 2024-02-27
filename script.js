@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="comment-btn">Add Comment</button>
                         <button class="stream-btn">Stream</button>
                     </div>
-                `;
+                `; 7.5
                 cardContainer.appendChild(card);
 
                 // Add event listener for comment button
@@ -37,13 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     const popupGenre = document.getElementById('popup-genre');
                     const popupLanguage = document.getElementById('popup-language');
                     const popupSummary = document.getElementById('popup-summary');
+                    popupImg.style.display = 'none'; // Hide the image element
 
-                    popupImg.src = show.image.medium; // Set the source of the pop-up image
+                    // Set the background image of the popup
+                    popupContainer.style.backgroundImage = `url(${show.image.medium})`;
+                    // Make sure to adjust the CSS to accommodate background image
                     popupName.textContent = show.name; // Set the name
                     popupGenre.textContent = "Genre: " + show.genres.join(', '); // Set the genres
                     popupSummary.textContent = show.summary; // Set the summary
                     popupLanguage.textContent = "Language: " + show.language; // Set the language
-
                     popupContainer.style.display = 'block';
                 });
 
