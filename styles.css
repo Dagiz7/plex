@@ -237,8 +237,8 @@ button[type="submit"] {
 
 .popup-container {
     display: none;
+    position: fixed;
     overflow-y: scroll;
-
     top: 0;
     left: 0;
     width: 100%;
@@ -251,13 +251,14 @@ button[type="submit"] {
 .popup {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
-    height: 95%;
-    background-size: cover;
+    height: 100%;
     /* Ensure the background image covers the entire element */
+    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     padding: 20px;
     border-radius: 0;
     text-align: center;

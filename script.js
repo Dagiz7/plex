@@ -32,7 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const commentBtn = card.querySelector('.comment-btn');
                 commentBtn.addEventListener('click', () => {
                     // Display the pop-up modal
+                    // Display the pop-up modal
                     const popupContainer = document.getElementById('popup-container');
+                    popupContainer.style.backgroundImage = `url(${show.image.medium})`;
+                    popupContainer.style.display = 'block';
+
                     const popupImg = document.getElementById('popup-img');
                     const popupName = document.getElementById('popup-name');
                     const popupGenre = document.getElementById('popup-genre');
