@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="comment-btn">Add Comment</button>
                         <button class="stream-btn">Stream</button>
                     </div>
-                `; 7.5
+                `;
+
                 cardContainer.appendChild(card);
 
                 // Add event listener for comment button
@@ -78,24 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-
-document.getElementById('submit-comment').addEventListener('click', () => {
-    const emailInput = document.getElementById('email-input').value;
-    const commentText = document.getElementById('comment-text').value;
-    // Check if email is valid
-    if (!validateEmail(emailInput)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    // Add your logic here to handle the comment submission
-    console.log('Submitted email:', emailInput);
-    console.log('Submitted comment:', commentText);
-    // Close the pop-up modal after submitting comment
-    document.getElementById('popup-container').style.display = 'none';
-});
-
 // Function to validate email address
 function validateEmail(email) {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
-};
+}
