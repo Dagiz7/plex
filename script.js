@@ -36,7 +36,37 @@ document.addEventListener('DOMContentLoaded', function () {
                     const popupContainer = document.getElementById('popup-container');
                     popupContainer.style.backgroundImage = `url(${show.image.medium})`;
                     popupContainer.style.display = 'block';
+                    // Set the rating as star icons
+                    const popupRating = document.getElementById('popup-rating');
+                    popupRating.innerHTML = '';
+                    const rating = show.rating.average; // Use the average rating without rounding
+                    const maxStars = 5; // Total number of stars
 
+                    // Calculate the number of filled, half, and empty stars
+                    const filledStars = Math.floor(rating); // Number of filled full stars
+                    const hasHalfStar = rating % 1 >= 0.5; // Check if there's a half star
+                    const emptyStars = maxStars - filledStars - (hasHalfStar ? 1 : 0); // Number of empty stars
+
+                    // Add filled stars
+                    for (let i = 0; i < filledStars; i++) {
+                        const starIcon = document.createElement('i');
+                        starIcon.className = 'fas fa-star yellow-star'; // Add yellow color class for filled stars
+                        popupRating.appendChild(starIcon);
+                    }
+
+                    // Add half star if applicable
+                    if (hasHalfStar) {
+                        const halfStarIcon = document.createElement('i');
+                        halfStarIcon.className = 'fas fa-star-half-alt yellow-star'; // Add yellow color class for half star
+                        popupRating.appendChild(halfStarIcon);
+                    }
+
+                    // Add empty stars
+                    for (let i = 0; i < emptyStars; i++) {
+                        const emptyStarIcon = document.createElement('i');
+                        emptyStarIcon.className = 'far fa-star'; // Add empty star class for unfilled stars
+                        popupRating.appendChild(emptyStarIcon);
+                    }
                     const popupImg = document.getElementById('popup-img');
                     const popupName = document.getElementById('popup-name');
                     const popupGenre = document.getElementById('popup-genre');
